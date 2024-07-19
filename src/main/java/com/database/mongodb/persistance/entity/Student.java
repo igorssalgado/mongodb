@@ -10,6 +10,7 @@ public class Student {
 
     @Id
     private String id;
+
     private String name;
     private LocalDate birthdate;
     private String document;
@@ -22,6 +23,14 @@ public class Student {
         this.name = name;
         this.birthdate = birthdate;
         this.document = document;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,9 +56,4 @@ public class Student {
     public void setDocument(String document) {
         this.document = document;
     }
-
-    public String getId() {
-        return null;
-    }
-
 }
