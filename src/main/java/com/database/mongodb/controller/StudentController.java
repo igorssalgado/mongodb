@@ -2,7 +2,6 @@ package com.database.mongodb.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +17,11 @@ import com.database.mongodb.service.StudentService;
 @RequestMapping("/v1")
 public class StudentController {
 
-    @Autowired
     private StudentService service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<StudentResponse> create(@RequestBody StudentRequest request) {

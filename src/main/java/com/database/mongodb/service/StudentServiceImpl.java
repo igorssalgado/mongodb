@@ -3,7 +3,6 @@ package com.database.mongodb.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.database.mongodb.model.StudentRequest;
@@ -14,8 +13,11 @@ import com.database.mongodb.persistance.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    StudentRepository repository;
+    private StudentRepository repository;
+
+    public StudentServiceImpl(StudentRepository repository) {
+        this.repository = repository;
+    }
 
     // cria o Student com nome, documento e aniversario. O Id é gerado automatico no mongo.
     @Override
