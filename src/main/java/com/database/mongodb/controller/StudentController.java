@@ -1,6 +1,7 @@
 package com.database.mongodb.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.database.mongodb.model.StudentRequest;
 import com.database.mongodb.model.StudentResponse;
+import com.database.mongodb.persistance.entity.Student;
 import com.database.mongodb.service.StudentService;
 
 @RestController
@@ -31,14 +33,18 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentResponse>> getAll(){
+    public ResponseEntity<List<StudentResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public String deleteById(@PathVariable String id){
+    public String deleteById(@PathVariable String id) {
         ResponseEntity.ok(service.deleteById(id));
         return "id: " + id + " deleted";
     }
 
+    @GetMapping(value = "{id}")
+    public Optional<Student> findById(@PathVariable String id) {
+        return service.findById(id);
+    }
 }

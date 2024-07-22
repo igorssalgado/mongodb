@@ -2,6 +2,7 @@ package com.database.mongodb.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class StudentServiceImpl implements StudentService {
         this.repository = repository;
     }
 
-    // cria o Student com nome, documento e aniversario. O Id é gerado automatico no mongo.
+    // cria o Student com nome, documento e aniversario. O Id é gerado automatico no
+    // mongo.
     @Override
     public StudentResponse create(StudentRequest request) {
         Student student = new Student();
@@ -45,14 +47,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentResponse> getAll() {
-        //inicializa um array das reponses
+        // inicializa um array das reponses
         List<StudentResponse> responses = new ArrayList<>();
 
         // vai no banco e procura todos students
         List<Student> students = repository.findAll();
 
         // se retornar alguma coisa, adiciona cada um no array de responses
-        if(!students.isEmpty()){
+        if (!students.isEmpty()) {
             for (Student student : students) {
                 responses.add(createResponse(student));
             }
@@ -62,9 +64,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String deleteById(String id){
+    public String deleteById(String id) {
         repository.deleteById(id);
         return id;
+    }
+
+    @Override
+    public Optional<Student> findById(String id) {
+        return repository.findById(id);
     }
 
 }
