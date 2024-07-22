@@ -9,5 +9,6 @@ public interface StudentService {
     
     StudentResponse create(StudentRequest request);
     List<StudentResponse> getAll();
+    String deleteById(String id);
 
 }

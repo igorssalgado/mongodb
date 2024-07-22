@@ -61,4 +61,10 @@ public class StudentServiceImpl implements StudentService {
         return responses;
     }
 
+    @Override
+    public String deleteById(String id){
+        repository.deleteById(id);
+        return id;
+    }
+
 }
