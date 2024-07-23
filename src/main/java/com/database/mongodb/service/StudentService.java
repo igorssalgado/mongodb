@@ -12,4 +12,5 @@ public interface StudentService {
     List<StudentResponse> getAll();
     String deleteById(String id);
     Optional<Student> findById(String id);
+    StudentResponse update(StudentRequest request);
 }
