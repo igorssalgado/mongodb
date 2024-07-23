@@ -71,7 +71,33 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Optional<Student> findById(String id) {
-        return repository.findById(id);
+        if (repository.findById(id).isEmpty()) {
+            return Optional.empty();
+        } else {
+            return repository.findById(id);
+        }
+    }
+
+    @Override
+    public StudentResponse update(StudentRequest request) {
+        Student student = new Student();
+        
+        try {
+            student.setId(request.getId());
+            if (findById(request.getId()).isEmpty()) {
+                throw new Exception("Id not found!");
+            }
+            student.setName(request.getName());
+            student.setDocument(request.getDocument());
+            student.setBirthdate(request.getBirthdate());
+            repository.save(student);
+            return createResponse(student);
+        } catch (Exception e) {
+            System.out.println(e.getMessage()); 
+        }
+
+        return null;
+        
     }
 
 }
